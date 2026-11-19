@@ -9,4 +9,8 @@ Mykhailo Yehrashkin
 Student number - L00194993
 
 ---
-IDE used - eclipse
+### Build without IDE:
+Powershell build:
+`javac -d bin -sourcepath src (Get-ChildItem -Path src -Recurse -Filter *.java | ForEach-Object { $_.FullName })`
+RUN;
+`java -cp bin ie.atu.menu.swingmenu`
