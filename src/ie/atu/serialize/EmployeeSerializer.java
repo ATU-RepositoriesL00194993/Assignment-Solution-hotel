@@ -44,10 +44,10 @@ public class EmployeeSerializer {
     // TODO - Update add() so it checks if Cancel was clicked when reading Employee
 
     // Read its details
-    // NEW IT CHECKS IF DETAILS ENTERED PROPERLY
     boolean created = employee.read();
-    // And add it to the employees ArrayList
+    // NEW: CODE CHECKS IF DETAILS ENTERED PROPERLY
     if (created) {
+    // And add it to the employees ArrayList
       employees.add(employee);
     }
   }
@@ -120,8 +120,21 @@ public class EmployeeSerializer {
   // i.e. it will write employees to a file called employees.bin
   public void serializeEmployees() {
     // TODO - Write the code for serializeEmployees()
-    JOptionPane.showMessageDialog(null, "You must write the code for the serializeEmployees() method.",
-        "NOT IMPLEMENTED", JOptionPane.INFORMATION_MESSAGE);
+    ObjectOutputStream os = null;
+    try {
+      // Serialize the ArrayList of Employee objects
+      FileOutputStream fileStream = new FileOutputStream(employeesFile);
+      os = new ObjectOutputStream(fileStream);
+      os.writeObject(employees);
+      os.close();
+    } catch (FileNotFoundException fNFE) {
+      System.out.println("Cannot create file to save employees list");
+    } catch (IOException ioE) {
+      System.out.println("Cannot write to " + FILENAME + ".");
+    }
+
+    //JOptionPane.showMessageDialog(null, "You must write the code for the serializeEmployees() method.",
+    //    "NOT IMPLEMENTED", JOptionPane.INFORMATION_MESSAGE);
   }
 
   // This method will deserialize the Employees ArrayList when called,
