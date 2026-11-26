@@ -30,13 +30,13 @@ public class EmployeeSerializer {
 
   }
 
-  ///////////////////////////////////////
+  //////////////////////////////////////
   // Method Name : add() //
   // Return Type : void //
   // Parameters : None //
   // Purpose : Reads one Employee record from the user //
   // and adds it to the ArrayList called employees //
-  //////////////////////////////////////////
+  /////////////////////////////////////////
   public void add() {
     // Create an Employee object
     Employee employee = new Employee();
@@ -47,17 +47,17 @@ public class EmployeeSerializer {
     boolean created = employee.read();
     // NEW: CODE CHECKS IF DETAILS ENTERED PROPERLY
     if (created) {
-    // And add it to the employees ArrayList
+      // And add it to the employees ArrayList
       employees.add(employee);
     }
   }
 
-  ////////////////////////////////////
+  ///////////////////////////////////
   // Method Name : list() //
   // Return Type : void //
   // Parameters : None //
   // Purpose : Lists all Employee recors in employees //
-  /////////////////////////////////////
+  ////////////////////////////////////
   public void list() {
     String employeesToList = "";
 
@@ -77,39 +77,89 @@ public class EmployeeSerializer {
       JOptionPane.showMessageDialog(null, "No Empoyees to list.", "EMPLOYEE LIST", JOptionPane.INFORMATION_MESSAGE);
   }
 
-  /////////////////////////////////////////////
+  /////// NEW METHOD - FIND EMPLOYEE BY ID
+  public Employee find() {
+    // get ID
+    // read ID from user
+    JTextField txtID = new JTextField();
+    JDialog dialog = new JDialog();
+    dialog.setAlwaysOnTop(true);
+    int option = JOptionPane.showConfirmDialog(dialog, txtID, "Enter Employee's ID", JOptionPane.OK_CANCEL_OPTION);
+
+    if (option != JOptionPane.OK_OPTION) {
+      return null;
+    }
+
+    int idFromUser = 0;
+    // try convert String from user to number
+    try {
+      idFromUser = Integer.parseInt(txtID.getText());
+    } catch(NumberFormatException e) {
+      JOptionPane.showMessageDialog(null, "Invalid ID input", "READ ID", JOptionPane.INFORMATION_MESSAGE);
+      return null;
+    }
+
+    for (Employee e : employees) {
+      if (e.getID() == idFromUser) {
+        // found!
+        return e;
+      }
+    }
+
+    // Inform user if not found
+    JOptionPane.showMessageDialog(null, "Employee with ID " + idFromUser + " NOT FOUND.", "EMPLOYEE VIEW", JOptionPane.INFORMATION_MESSAGE);
+    return null;
+  }
+
+  ////////////////////////////////////////////
   // Method Name : view() //
   // Return Type : Employee //
   // Parameters : None //
   // Purpose : Displays the required Employee record on screen //
   // : And returns it, or null if not found //
-  //////////////////////////////////////////////
+  /////////////////////////////////////////////
   public Employee view() {
     // TODO - Write the code for view()
-    JOptionPane.showMessageDialog(null, "view() method must be coded!", "NOT IMPLEMENTED",
-        JOptionPane.INFORMATION_MESSAGE);
+    if (employees.isEmpty()) {
+      JOptionPane.showMessageDialog(null, "There are no Employees.", "VIEW EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
+      return null;
+    }
+    // find employee by ID from user
+    Employee foundEmployee = find();    
 
-    return null;
+    if (foundEmployee == null) {
+      return null;
+    }
+    // Display found employee
+    JOptionPane.showMessageDialog(null, foundEmployee, "EMPLOYEE VIEW", JOptionPane.INFORMATION_MESSAGE);
+    return foundEmployee;
   }
 
-  ////////////////////////////////////////////////
+  ///////////////////////////////////////////////
   // Method Name : delete() //
   // Return Type : void //
   // Parameters : None //
   // Purpose : Deletes the required Employee recordfrom employees //
-  /////////////////////////////////////////////////
+  ////////////////////////////////////////////////
   public void delete() {
     // TODO - Write the code for delete()
-    JOptionPane.showMessageDialog(null, "delete() method must be coded!", "NOT IMPLEMENTED",
-        JOptionPane.INFORMATION_MESSAGE);
+    if (employees.isEmpty()) {
+      JOptionPane.showMessageDialog(null, "There are no Employees.", "DELETE EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
+      return null;
+    }
+
+    Employee foundEmployee = find();
+    employees.delete(foundEmployee);
+
+    JOptionPane.showMessageDialog(null, "Successfuly deleted employee.", "DELETE EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
   }
 
-  ////////////////////////////////////////////
+  ///////////////////////////////////////////
   // Method Name : edit() //
   // Return Type : void //
   // Parameters : None //
   // Purpose : Edits the required Employee recod in employees //
-  /////////////////////////////////////////////
+  ////////////////////////////////////////////
   public void edit() {
     // TODO - Write the code for edit()
     JOptionPane.showMessageDialog(null, "edit() method must be coded!", "NOT IMPLEMENTED",
@@ -133,8 +183,9 @@ public class EmployeeSerializer {
       System.out.println("Cannot write to " + FILENAME + ".");
     }
 
-    //JOptionPane.showMessageDialog(null, "You must write the code for the serializeEmployees() method.",
-    //    "NOT IMPLEMENTED", JOptionPane.INFORMATION_MESSAGE);
+    // JOptionPane.showMessageDialog(null, "You must write the code for the
+    // serializeEmployees() method.",
+    // "NOT IMPLEMENTED", JOptionPane.INFORMATION_MESSAGE);
   }
 
   // This method will deserialize the Employees ArrayList when called,

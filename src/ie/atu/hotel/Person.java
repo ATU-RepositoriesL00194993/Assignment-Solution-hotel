@@ -1,8 +1,10 @@
 package ie.atu.hotel;
 
+import java.io.Serializable;
+
 import ie.atu.hotel.Name;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
   protected Name name;
   protected String phoneNumber;
 
@@ -21,13 +23,15 @@ public abstract class Person {
   }
 
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof Person)) return false;
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Person))
+      return false;
 
     Person person = (Person) obj;
 
     return person.getName().equals(this.name) &&
-      person.getPhoneNumber().equals(this.phoneNumber);
+        person.getPhoneNumber().equals(this.phoneNumber);
   }
 
   public Name getName() {
@@ -46,4 +50,3 @@ public abstract class Person {
     this.phoneNumber = phoneNumber;
   }
 }
-

@@ -61,7 +61,7 @@ public class Employee extends Person implements Payable, Serializable {
 
     JDialog dialog = new JDialog();
     dialog.setAlwaysOnTop(true);
-    int option = JOptionPane.showConfirmDialog(dialog, message, "Enter book details", JOptionPane.OK_CANCEL_OPTION);
+    int option = JOptionPane.showConfirmDialog(dialog, message, "Enter Employee details", JOptionPane.OK_CANCEL_OPTION);
 
     // if CANCEL clicked
     if (option != JOptionPane.OK_OPTION) {
@@ -76,7 +76,7 @@ public class Employee extends Person implements Payable, Serializable {
     try {
       salary = Double.parseDouble(txtSalary.getText());
     } catch (NumberFormatException e) {
-      System.out.println("Invalid salary input: " + e.getMessage());
+      JOptionPane.showMessageDialog(null, "Invalid salary input", "ADD EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
       nextID--;
       return false;
     }

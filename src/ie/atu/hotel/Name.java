@@ -1,59 +1,61 @@
 package ie.atu.hotel;
 
-public class Name {
-    private String title;
-    private String firstName;
-    private String surname;
+import java.io.Serializable;
 
-    public Name() {
-    	this.title = "";
-        this.firstName = "";
-        this.surname = "" ;
-    }
+public class Name implements Serializable {
+  private String title;
+  private String firstName;
+  private String surname;
 
-    public Name(String title, String firstName, String surname) {
-    	this.title = title;
-        this.firstName = firstName;
-        this.surname = surname;
-    }
+  public Name() {
+    this.title = "";
+    this.firstName = "";
+    this.surname = "";
+  }
 
-    public String getTitle() {
-    	return this.title;     
-    }
+  public Name(String title, String firstName, String surname) {
+    this.title = title;
+    this.firstName = firstName;
+    this.surname = surname;
+  }
 
-    public void setTitle(String title) {
-    	this.title = title;
-    }
+  public String getTitle() {
+    return this.title;
+  }
 
-    public String getFirstName() {
-    	return this.firstName;     
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setFirstName(String firstName) {
-    	this.firstName = firstName;
-    }
+  public String getFirstName() {
+    return this.firstName;
+  }
 
-    public String getSurname() {
-    	return this.surname;     
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public void setSurname(String surname) {
-    	this.surname = surname;
-    }
+  public String getSurname() {
+    return this.surname;
+  }
 
-    public String toString() {
-    	return this.title + " " + this.firstName + " " + this.surname;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public Boolean equals(Name other) {
-    	return other.getTitle().equals(this.title) &&
-    			other.getFirstName().equals(this.firstName) &&
-    			other.getSurname().equals(this.surname);
-    }
-    
-    public Boolean isFemale() {
-    	return this.title.toLowerCase().equals("miss") ||
-    			this.title.toLowerCase().equals("ms")  ||
-    			this.title.toLowerCase().equals("mrs"); 
-    }
+  public String toString() {
+    return this.title + " " + this.firstName + " " + this.surname;
+  }
+
+  public Boolean equals(Name other) {
+    return other.getTitle().equals(this.title) &&
+        other.getFirstName().equals(this.firstName) &&
+        other.getSurname().equals(this.surname);
+  }
+
+  public Boolean isFemale() {
+    return this.title.toLowerCase().equals("miss") ||
+        this.title.toLowerCase().equals("ms") ||
+        this.title.toLowerCase().equals("mrs");
+  }
 }
