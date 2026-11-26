@@ -15,5 +15,6 @@ Powershell build:
 
 GNU/Linux build;
 `javac -d bin -sourcepath src $(find src -type f -name "*.java")`
+
 RUN;
 `java -cp bin ie.atu.menu.SwingMenu`
