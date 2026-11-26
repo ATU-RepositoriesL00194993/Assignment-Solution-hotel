@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 
 public class Employee extends Person implements Payable, Serializable {
-  private static int nextID = 1000;
+  private static int nextID = 10000;
 
   private Date dateOfBirth;
   private Date startDate;
@@ -155,6 +155,15 @@ public class Employee extends Person implements Payable, Serializable {
     this.salary = salary;
   }
 
+  // GETTER AND SETTED FOR NEXTID TO SAVE IDS INBETWEEN APP RUNS 
+  public static int getNextID() {
+    return nextID;
+  }
+
+  public static void setNextID(int id) {
+    nextID = id;
+  }
+  
   public int getID() {
     return this.ID;
   }

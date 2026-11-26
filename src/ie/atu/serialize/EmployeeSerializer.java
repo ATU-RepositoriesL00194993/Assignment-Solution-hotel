@@ -186,6 +186,7 @@ public class EmployeeSerializer {
       FileOutputStream fileStream = new FileOutputStream(employeesFile);
       os = new ObjectOutputStream(fileStream);
       os.writeObject(employees);
+      os.writeObject(Employee.getNextID());
       os.close();
     } catch (FileNotFoundException fNFE) {
       System.out.println("Cannot create file to save employees list");
@@ -211,6 +212,8 @@ public class EmployeeSerializer {
         is = new ObjectInputStream(fileStream);
 
         employees = (ArrayList<Employee>) is.readObject();
+        int nextID = (int) is.readObject();
+        Employee.setNextID(nextID);
 
         is.close();
       } catch (FileNotFoundException e) {
