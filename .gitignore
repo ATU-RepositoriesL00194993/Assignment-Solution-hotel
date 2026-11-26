@@ -1,2 +1,8 @@
 *.class
 *.note
+
+# eclipse
+*.classpath
+.metadata/
+.settings/
+.project/
