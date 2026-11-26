@@ -37,18 +37,22 @@ public class Employee extends Person implements Payable, Serializable {
 
   // -------------------
   // NEW ADD METHOD for EmployeeSerializer
-  // --------------- ----
+  // -------------------
   public boolean read() {
     JTextField employeeID = new JTextField();
     employeeID.setText("" + this.getID());
     JTextField txtFirstName = new JTextField();
+    txtFirstName.setText(this.getName().getFirstName());
     // dropdown menu for titles
     String[] titles = { "Mr", "Ms", "Mrs", "Miss" };
     JComboBox<String> boxTitle = new JComboBox<String>(titles);
     // txtFirstName.requestFocus();
     JTextField txtSurname = new JTextField();
+    txtSurname.setText(this.getName().getSurname());
     JTextField txtPhoneNumber = new JTextField();
+    txtPhoneNumber.setText(this.getPhoneNumber());
     JTextField txtSalary = new JTextField();
+    txtSalary.setText(String.valueOf(this.getSalary()));
 
     Object[] message = {
         "Employee Number:", employeeID,
@@ -65,7 +69,10 @@ public class Employee extends Person implements Payable, Serializable {
 
     // if CANCEL clicked
     if (option != JOptionPane.OK_OPTION) {
-      nextID--;
+      // decrement ID back if not editing (creating new)
+      if (this.salary != 0.0) {
+        nextID--;
+      }
       return false;
     }
 

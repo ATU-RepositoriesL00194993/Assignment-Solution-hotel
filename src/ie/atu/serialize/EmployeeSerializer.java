@@ -145,11 +145,11 @@ public class EmployeeSerializer {
     // TODO - Write the code for delete()
     if (employees.isEmpty()) {
       JOptionPane.showMessageDialog(null, "There are no Employees.", "DELETE EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
-      return null;
+      return;
     }
 
     Employee foundEmployee = find();
-    employees.delete(foundEmployee);
+    employees.remove(foundEmployee);
 
     JOptionPane.showMessageDialog(null, "Successfuly deleted employee.", "DELETE EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
   }
@@ -162,8 +162,18 @@ public class EmployeeSerializer {
   ////////////////////////////////////////////
   public void edit() {
     // TODO - Write the code for edit()
-    JOptionPane.showMessageDialog(null, "edit() method must be coded!", "NOT IMPLEMENTED",
-        JOptionPane.INFORMATION_MESSAGE);
+    if (employees.isEmpty()) {
+      JOptionPane.showMessageDialog(null, "There are no Employees.", "DELETE EMPLOYEE", JOptionPane.INFORMATION_MESSAGE);
+      return;
+    }
+
+    Employee foundEmployee = find();
+    if (foundEmployee == null) {
+      return;
+    }
+
+    // edit by calling read
+    foundEmployee.read();
   }
 
   // This method will serialize the employees ArrayList when called,
